@@ -32,13 +32,12 @@
     <h2>Teams:</h2>
     <ol>
         <ui:repeat value="#{teams.allTeams}" var="team">
-            <li><h:link value="#{team.name}" outcome="players?teamId=#{team.id}" /></li>
+            <li>#{team.name}</li>
         </ui:repeat>
     </ol>
     <h:form>
         <h:inputText value="#{teams.teamToCreate.name}" required="true" />
         <h:commandButton value="Add new team" actionListener="#{teams.createTeam}" action="index?faces-redirect=true"/>
     </h:form>
-    <h:link outcome="myBatis/teams" value="MyBatis implementation"/>
 </h:body>
 </html>

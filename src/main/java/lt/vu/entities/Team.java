@@ -25,9 +25,6 @@ public class Team implements Serializable {
 
     private String name;
 
-    @OneToMany(mappedBy = "team")
-    private List<Player> players = new ArrayList<>();
-
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name="TEAM_EMPLOYEE")
     private List<Employee> employees = new ArrayList<>();

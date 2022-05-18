@@ -4,11 +4,9 @@ package lt.vu.usecases;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.entities.Employee;
-import lt.vu.entities.Player;
 import lt.vu.entities.Team;
 import lt.vu.interceptors.LoggedInvocation;
 import lt.vu.persistence.EmployeesDAO;
-import lt.vu.persistence.PlayersDAO;
 import lt.vu.persistence.TeamsDAO;
 
 import javax.annotation.PostConstruct;
@@ -58,7 +56,7 @@ public class UpdateEmployeeDetails implements Serializable {
     public String updateExternalId() {
         try{
             employeesDAO.update(this.employee);
-        } catch (Exception e) {
+        } catch (OptimisticLockException e) {
             return "/employeeDetails.xhtml?faces-redirect=true&employeeId=" + this.employee.getId() + "&error=optimistic-lock-exception";
         }
         return "employeeDetails.xhtml?employeeId=" + this.employee.getId() + "&faces-redirect=true";
@@ -71,7 +69,7 @@ public class UpdateEmployeeDetails implements Serializable {
             Employee manager = employeesDAO.findOne(managerId);
             employee.setManager(manager);
             employeesDAO.update(employee);
-        } catch (Exception e) {
+        } catch (OptimisticLockException e) {
             return "/employeeDetails.xhtml?faces-redirect=true&employeeId=" + this.employee.getId() + "&error=optimistic-lock-exception";
         }
         return "employeeDetails.xhtml?employeeId=" + this.employee.getId() + "&faces-redirect=true";
@@ -86,7 +84,7 @@ public class UpdateEmployeeDetails implements Serializable {
                 team.getEmployees().add(employee);
                 teamsDao.update(team);
             }
-        } catch (Exception e) {
+        } catch (OptimisticLockException e) {
             return "/employeeDetails.xhtml?faces-redirect=true&employeeId=" + this.employee.getId() + "&error=optimistic-lock-exception";
         }
         return "employeeDetails.xhtml?employeeId=" + this.employee.getId() + "&faces-redirect=true";

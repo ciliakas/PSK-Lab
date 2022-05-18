@@ -51,8 +51,8 @@ public class Employee  implements Serializable{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Employee player = (Employee) o;
-        return Objects.equals(id, player.id) &&
-                Objects.equals(name, player.name);
+        Employee employee = (Employee) o;
+        return Objects.equals(id, employee.id) &&
+                Objects.equals(name, employee.name);
     }
 }

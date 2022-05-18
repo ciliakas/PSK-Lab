@@ -4,11 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class PlayerDto {
+public class EmployeeDto {
 
     private String Name;
 
-    private Integer JerseyNumber;
+    private Integer ExternalId;
 
-    private String TeamName;
+    private String ManagerName;
 }
