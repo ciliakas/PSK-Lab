@@ -76,6 +76,7 @@ public class EmployeeController {
             employee.setExternalId(employeeDto.getExternalId());
 
             employeesDAO.persist(employee);
+            employeeDto.setId(employee.getId());
 
             return Response.ok(employeeDto).build();
         }
