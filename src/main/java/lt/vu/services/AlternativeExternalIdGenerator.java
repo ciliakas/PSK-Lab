@@ -16,6 +16,6 @@ public class AlternativeExternalIdGenerator implements ExternalIdGenerator {
             Thread.sleep(1500); // Simulate intensive work
         } catch (InterruptedException e) {
         }
-        return 2000 + new Random().nextInt(1000);
+        return 2500 + new Random().nextInt(500);
     }
 }

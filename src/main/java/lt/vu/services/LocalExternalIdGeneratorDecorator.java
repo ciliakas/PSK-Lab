@@ -6,7 +6,7 @@ import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 
 @Decorator
-public abstract class LocalExternalIdGenerator implements ExternalIdGenerator {
+public abstract class LocalExternalIdGeneratorDecorator implements ExternalIdGenerator {
 
     @Inject
     @Delegate

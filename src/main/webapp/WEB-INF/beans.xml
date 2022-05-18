@@ -11,7 +11,7 @@
     </interceptors>
     <decorators>
         <class>
-            lt.vu.services.LocalExternalIdGenerator
+            lt.vu.services.LocalExternalIdGeneratorDecorator
         </class>
     </decorators>
     <alternatives>
