@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head/>
+<h:body>
+    <h2>#{updateEmployeeDetails.employee.name}</h2>
+    External Id: #{updateEmployeeDetails.employee.externalId},
+    Manager: #{updateEmployeeDetails.employee.manager.name}
+    <h4>Set external id:</h4>
+    <h:form>
+        <h:outputText value="External id: "/>
+        <h:inputText a:placeholder="enter the value" value="#{updateEmployeeDetails.employee.externalId}" required="true" />
+        <h:commandButton value="update" action="#{updateEmployeeDetails.updateExternalId()}">
+            <f:param name="employeeId" value="#{updateEmployeeDetails.employee.id}" />
+        </h:commandButton>
+        <h:outputText value="Value was already modified by other user. If you want to override it - try again" rendered="#{param['error'] == 'optimistic-lock-exception'}" />
+    </h:form>
+    <h:form>
+        <h:outputText value="#{generateEmployeeExternalId.externalIdStatus}" />
+        <h:commandButton value="Generate employee external id?" disabled="#{generateEmployeeExternalId.externalIdGenerationRunning}" action="#{generateEmployeeExternalId.generateNewExternalId()}">
+            <f:param name="employeeId" value="#{updateEmployeeDetails.employee.id}" />
+        </h:commandButton>
+    </h:form>
+    <h4>Select manager:</h4>
+    <h:form>
+    <title>Select manager</title>
+    <h:selectOneMenu value="#{updateEmployeeDetails.managerId}">
+        <f:selectItems value="#{employees.allEmployees}" var="employee"
+                       itemValue="#{employee.id }" itemLabel="#{employee.name}">
+        </f:selectItems>
+    </h:selectOneMenu>
+    <h:commandButton value="update" action="#{updateEmployeeDetails.setManagerById()}">
+        <f:param name="employeeId" value="#{updateEmployeeDetails.employee.id}" />
+    </h:commandButton>
+    </h:form>
+    <h4>Add to team:</h4>
+    <h:form>
+        <title>Add team</title>
+        <h:selectManyMenu value="#{updateEmployeeDetails.teamsId}">
+            <f:selectItems value="#{teams.allTeams}" var="team"
+                           itemValue="#{team.id }" itemLabel="#{team.name}">
+            </f:selectItems>
+        </h:selectManyMenu>
+        <h:commandButton value="update" action="#{updateEmployeeDetails.setTeamById()}">
+            <f:param name="employeeId" value="#{updateEmployeeDetails.employee.id}" />
+        </h:commandButton>
+    </h:form>
+    <h3>Teams:</h3>
+    <ul>
+        <ui:repeat value="#{updateEmployeeDetails.employee.teams}" var="team">
+            <li>
+                #{team.name}
+            </li>
+        </ui:repeat>
+    </ul>
+    <h3>Managed employees:</h3>
+    <ul>
+        <ui:repeat value="#{updateEmployeeDetails.employee.subordinates}" var="employee">
+            <li>
+                #{employee.name}
+            </li>
+        </ui:repeat>
+    </ul>
+    <h:link outcome="index" value="Back to home page"/>
+</h:body>
+</html>
