@@ -5,6 +5,7 @@ import lombok.Setter;
 import lt.vu.mybatis.dao.EmployeeMapper;
 import lt.vu.mybatis.model.Employee;
 import lt.vu.services.ExternalIdGenerator;
+import lt.vu.services.StandardExternalIdGenerator;
 
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
@@ -16,7 +17,7 @@ public class EmployeesMyBatis {
     EmployeeMapper employeeMapper;
 
     @Inject
-    ExternalIdGenerator externalIdGenerator;
+    StandardExternalIdGenerator externalIdGenerator;
 
     @Getter @Setter
     private Employee employeeToCreate = new Employee();

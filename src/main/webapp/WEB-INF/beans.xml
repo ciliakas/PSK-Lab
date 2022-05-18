@@ -9,4 +9,12 @@
     <interceptors>
         <class>lt.vu.interceptors.MethodLogger</class>
     </interceptors>
+    <decorators>
+        <class>
+            lt.vu.services.LocalExternalIdGenerator
+        </class>
+    </decorators>
+    <alternatives>
+        <class>lt.vu.services.AlternativeExternalIdGenerator</class>
+    </alternatives>
 </beans>
